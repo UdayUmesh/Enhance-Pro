@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Enhancer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .image-container {
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image to Enhance</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button class="button" type="submit">Enhance Image</button>
+        </form>
+        {% if original_image %}
+            <div class="image-container">
+                <h2>Original Image:</h2>
+                <img src="{{ url_for('static', filename=original_image) }}" alt="Original Image">
+            </div>
+        {% endif %}
+        {% if enhanced_image %}
+            <div class="image-container">
+                <h2>Enhanced Image:</h2>
+                <img src="{{ url_for('static', filename=enhanced_image) }}" alt="Enhanced Image">
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,753 @@
+{
+ "subgraphs": [
+  {
+   "status": "OK",
+   "subgrpahName": "subgraph_/enc1/enc1.0/Conv_output_0_vaip_3",
+   "xirSubgraphInputs": [
+    {
+     "name": "input_DequantizeLinear_Output"
+    }
+   ],
+   "xirSubgraphOutputs": [
+    {
+     "name": "/enc1/enc1.3/Relu_output_0_DequantizeLinear_Output/duplicated_fix"
+    },
+    {
+     "name": "/enc1/enc1.3/Relu_output_0_DequantizeLinear_Output/duplicated_token_0_fix"
+    },
+    {
+     "name": "/enc2/enc2.3/Relu_output_0_DequantizeLinear_Output/duplicated_fix"
+    },
+    {
+     "name": "/enc2/enc2.3/Relu_output_0_DequantizeLinear_Output/duplicated_token_2_fix"
+    },
+    {
+     "name": "/enc3/enc3.3/Relu_output_0_DequantizeLinear_Output_vaip_53"
+    }
+   ],
+   "xirInputAnchorPoints": [
+    {
+     "name": "input_DequantizeLinear_Output",
+     "opType": "identity",
+     "next": {
+      "name": "input_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "input_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ],
+   "xirOutputAnchorPoints": [
+    {
+     "name": "/enc1/enc1.3/Relu_output_0_DequantizeLinear_Output/duplicated_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/enc1/enc1.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/enc1/enc1.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    },
+    {
+     "name": "/enc1/enc1.3/Relu_output_0_DequantizeLinear_Output/duplicated_token_0_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/enc1/enc1.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/enc1/enc1.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    },
+    {
+     "name": "/enc2/enc2.3/Relu_output_0_DequantizeLinear_Output/duplicated_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/enc2/enc2.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/enc2/enc2.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    },
+    {
+     "name": "/enc2/enc2.3/Relu_output_0_DequantizeLinear_Output/duplicated_token_2_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/enc2/enc2.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/enc2/enc2.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    },
+    {
+     "name": "/enc3/enc3.3/Relu_output_0_DequantizeLinear_Output_vaip_53",
+     "opType": "transpose",
+     "next": {
+      "name": "/enc3/enc3.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/enc3/enc3.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ],
+   "tryFuse": {
+    "inputs": [
+     "input_QuantizeLinear_Output"
+    ],
+    "outputs": [
+     "/enc1/enc1.3/Relu_output_0_QuantizeLinear_Output",
+     "/enc2/enc2.3/Relu_output_0_QuantizeLinear_Output",
+     "/enc3/enc3.3/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "arguments": [
+     "input_QuantizeLinear_Output"
+    ],
+    "returnValues": [
+     "/enc3/enc3.3/Relu_output_0_QuantizeLinear_Output",
+     "/enc2/enc2.3/Relu_output_0_QuantizeLinear_Output",
+     "/enc1/enc1.3/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "body": [
+     "/enc3/enc3.3/Relu_output_0_QuantizeLinear_Output",
+     "/enc3/enc3.3/Relu_output_0",
+     "/enc3/enc3.2/Conv_output_0",
+     "enc3.2.bias_DequantizeLinear_Output",
+     "enc3.2.weight_DequantizeLinear_Output",
+     "/enc3/enc3.1/Relu_output_0_DequantizeLinear_Output",
+     "/enc3/enc3.1/Relu_output_0_QuantizeLinear_Output",
+     "/enc3/enc3.1/Relu_output_0",
+     "/enc3/enc3.0/Conv_output_0",
+     "enc3.0.bias_DequantizeLinear_Output",
+     "enc3.0.weight_DequantizeLinear_Output",
+     "/pool_1/MaxPool_output_0_DequantizeLinear_Output",
+     "/pool_1/MaxPool_output_0_QuantizeLinear_Output",
+     "/pool_1/MaxPool_output_0",
+     "/enc2/enc2.3/Relu_output_0_DequantizeLinear_Output",
+     "/enc2/enc2.3/Relu_output_0_QuantizeLinear_Output",
+     "/enc2/enc2.3/Relu_output_0",
+     "/enc2/enc2.2/Conv_output_0",
+     "enc2.2.bias_DequantizeLinear_Output",
+     "enc2.2.weight_DequantizeLinear_Output",
+     "/enc2/enc2.1/Relu_output_0_DequantizeLinear_Output",
+     "/enc2/enc2.1/Relu_output_0_QuantizeLinear_Output",
+     "/enc2/enc2.1/Relu_output_0",
+     "/enc2/enc2.0/Conv_output_0",
+     "enc2.0.bias_DequantizeLinear_Output",
+     "enc2.0.weight_DequantizeLinear_Output",
+     "/pool/MaxPool_output_0_DequantizeLinear_Output",
+     "/pool/MaxPool_output_0_QuantizeLinear_Output",
+     "/pool/MaxPool_output_0",
+     "/enc1/enc1.3/Relu_output_0_DequantizeLinear_Output",
+     "/enc1/enc1.3/Relu_output_0_QuantizeLinear_Output",
+     "/enc1/enc1.3/Relu_output_0",
+     "/enc1/enc1.2/Conv_output_0",
+     "enc1.2.bias_DequantizeLinear_Output",
+     "enc1.2.weight_DequantizeLinear_Output",
+     "/enc1/enc1.1/Relu_output_0_DequantizeLinear_Output",
+     "/enc1/enc1.1/Relu_output_0_QuantizeLinear_Output",
+     "/enc1/enc1.1/Relu_output_0",
+     "/enc1/enc1.0/Conv_output_0",
+     "enc1.0.bias_DequantizeLinear_Output",
+     "enc1.0.weight_DequantizeLinear_Output",
+     "input_DequantizeLinear_Output"
+    ]
+   },
+   "onnxOutputAnchorPoints": [
+    {
+     "name": "/enc3/enc3.3/Relu_output_0_DequantizeLinear_Output_vaip_53",
+     "opType": "transpose",
+     "next": {
+      "name": "/enc3/enc3.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/enc3/enc3.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    },
+    {
+     "name": "/enc2/enc2.3/Relu_output_0_DequantizeLinear_Output/duplicated_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/enc2/enc2.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/enc2/enc2.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    },
+    {
+     "name": "/enc1/enc1.3/Relu_output_0_DequantizeLinear_Output/duplicated_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/enc1/enc1.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/enc1/enc1.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ]
+  },
+  {
+   "status": "try_fuse_failed",
+   "subgrpahName": "subgraph_/up/Resize_output_0_DequantizeLinear_Output/duplicated",
+   "xirSubgraphInputs": [
+    {
+     "name": "/up/Resize_output_0_DequantizeLinear_Output/duplicated_vaip_54"
+    }
+   ],
+   "xirSubgraphOutputs": [
+    {
+     "name": "/up/Resize_output_0_DequantizeLinear_Output/duplicated_fix"
+    }
+   ],
+   "xirInputAnchorPoints": [
+    {
+     "name": "/up/Resize_output_0_DequantizeLinear_Output/duplicated_vaip_54",
+     "opType": "transpose",
+     "next": {
+      "name": "/up/Resize_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/up/Resize_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ],
+   "xirOutputAnchorPoints": [
+    {
+     "name": "/up/Resize_output_0_DequantizeLinear_Output/duplicated_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/up/Resize_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/up/Resize_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ],
+   "tryFuse": {
+    "inputs": [
+     "/up/Resize_output_0_QuantizeLinear_Output"
+    ],
+    "outputs": [
+     "/up/Resize_output_0_QuantizeLinear_Output"
+    ]
+   },
+   "comments": "hit ceiling []"
+  },
+  {
+   "status": "try_fuse_failed",
+   "subgrpahName": "subgraph_/up/Resize_output_0_DequantizeLinear_Output",
+   "xirSubgraphInputs": [
+    {
+     "name": "/up/Resize_output_0_DequantizeLinear_Output/duplicated_vaip_54"
+    }
+   ],
+   "xirSubgraphOutputs": [
+    {
+     "name": "/up/Resize_output_0_DequantizeLinear_Output_fix"
+    }
+   ],
+   "xirInputAnchorPoints": [
+    {
+     "name": "/up/Resize_output_0_DequantizeLinear_Output/duplicated_vaip_54",
+     "opType": "transpose",
+     "next": {
+      "name": "/up/Resize_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/up/Resize_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ],
+   "xirOutputAnchorPoints": [
+    {
+     "name": "/up/Resize_output_0_DequantizeLinear_Output_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/up/Resize_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/up/Resize_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ],
+   "tryFuse": {
+    "inputs": [
+     "/up/Resize_output_0_QuantizeLinear_Output"
+    ],
+    "outputs": [
+     "/up/Resize_output_0_QuantizeLinear_Output"
+    ]
+   },
+   "comments": "hit ceiling []"
+  },
+  {
+   "status": "OK",
+   "subgrpahName": "subgraph_/dec3/dec3.1/Relu_output_0_DequantizeLinear_Output_vaip_25",
+   "xirSubgraphInputs": [
+    {
+     "name": "/dec3/dec3.1/Relu_output_0_DequantizeLinear_Output"
+    }
+   ],
+   "xirSubgraphOutputs": [
+    {
+     "name": "/dec3/dec3.3/Relu_output_0_DequantizeLinear_Output_vaip_58"
+    }
+   ],
+   "xirInputAnchorPoints": [
+    {
+     "name": "/dec3/dec3.1/Relu_output_0_DequantizeLinear_Output",
+     "opType": "identity",
+     "next": {
+      "name": "/dec3/dec3.1/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/dec3/dec3.1/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ],
+   "xirOutputAnchorPoints": [
+    {
+     "name": "/dec3/dec3.3/Relu_output_0_DequantizeLinear_Output_vaip_58",
+     "opType": "transpose",
+     "next": {
+      "name": "/dec3/dec3.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/dec3/dec3.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ],
+   "tryFuse": {
+    "inputs": [
+     "/dec3/dec3.1/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "outputs": [
+     "/dec3/dec3.3/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "arguments": [
+     "/dec3/dec3.1/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "returnValues": [
+     "/dec3/dec3.3/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "body": [
+     "/dec3/dec3.3/Relu_output_0_QuantizeLinear_Output",
+     "/dec3/dec3.3/Relu_output_0",
+     "/dec3/dec3.2/Conv_output_0",
+     "dec3.2.bias_DequantizeLinear_Output",
+     "dec3.2.weight_DequantizeLinear_Output",
+     "/dec3/dec3.1/Relu_output_0_DequantizeLinear_Output"
+    ]
+   },
+   "onnxOutputAnchorPoints": [
+    {
+     "name": "/dec3/dec3.3/Relu_output_0_DequantizeLinear_Output_vaip_58",
+     "opType": "transpose",
+     "next": {
+      "name": "/dec3/dec3.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/dec3/dec3.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "status": "try_fuse_failed",
+   "subgrpahName": "subgraph_/up_1/Resize_output_0_DequantizeLinear_Output/duplicated",
+   "xirSubgraphInputs": [
+    {
+     "name": "/up_1/Resize_output_0_DequantizeLinear_Output/duplicated_vaip_59"
+    }
+   ],
+   "xirSubgraphOutputs": [
+    {
+     "name": "/up_1/Resize_output_0_DequantizeLinear_Output/duplicated_fix"
+    }
+   ],
+   "xirInputAnchorPoints": [
+    {
+     "name": "/up_1/Resize_output_0_DequantizeLinear_Output/duplicated_vaip_59",
+     "opType": "transpose",
+     "next": {
+      "name": "/up_1/Resize_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/up_1/Resize_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ],
+   "xirOutputAnchorPoints": [
+    {
+     "name": "/up_1/Resize_output_0_DequantizeLinear_Output/duplicated_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/up_1/Resize_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/up_1/Resize_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ],
+   "tryFuse": {
+    "inputs": [
+     "/up_1/Resize_output_0_QuantizeLinear_Output"
+    ],
+    "outputs": [
+     "/up_1/Resize_output_0_QuantizeLinear_Output"
+    ]
+   },
+   "comments": "hit ceiling []"
+  },
+  {
+   "status": "try_fuse_failed",
+   "subgrpahName": "subgraph_/up_1/Resize_output_0_DequantizeLinear_Output",
+   "xirSubgraphInputs": [
+    {
+     "name": "/up_1/Resize_output_0_DequantizeLinear_Output/duplicated_vaip_59"
+    }
+   ],
+   "xirSubgraphOutputs": [
+    {
+     "name": "/up_1/Resize_output_0_DequantizeLinear_Output_fix"
+    }
+   ],
+   "xirInputAnchorPoints": [
+    {
+     "name": "/up_1/Resize_output_0_DequantizeLinear_Output/duplicated_vaip_59",
+     "opType": "transpose",
+     "next": {
+      "name": "/up_1/Resize_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/up_1/Resize_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ],
+   "xirOutputAnchorPoints": [
+    {
+     "name": "/up_1/Resize_output_0_DequantizeLinear_Output_fix",
+     "opType": "identity",
+     "next": {
+      "name": "/up_1/Resize_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/up_1/Resize_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ],
+   "tryFuse": {
+    "inputs": [
+     "/up_1/Resize_output_0_QuantizeLinear_Output"
+    ],
+    "outputs": [
+     "/up_1/Resize_output_0_QuantizeLinear_Output"
+    ]
+   },
+   "comments": "hit ceiling []"
+  },
+  {
+   "status": "OK",
+   "subgrpahName": "subgraph_/dec2/dec2.1/Relu_output_0_DequantizeLinear_Output_vaip_30",
+   "xirSubgraphInputs": [
+    {
+     "name": "/dec2/dec2.1/Relu_output_0_DequantizeLinear_Output"
+    }
+   ],
+   "xirSubgraphOutputs": [
+    {
+     "name": "/dec2/dec2.3/Relu_output_0_DequantizeLinear_Output_vaip_63"
+    }
+   ],
+   "xirInputAnchorPoints": [
+    {
+     "name": "/dec2/dec2.1/Relu_output_0_DequantizeLinear_Output",
+     "opType": "identity",
+     "next": {
+      "name": "/dec2/dec2.1/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/dec2/dec2.1/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ],
+   "xirOutputAnchorPoints": [
+    {
+     "name": "/dec2/dec2.3/Relu_output_0_DequantizeLinear_Output_vaip_63",
+     "opType": "transpose",
+     "next": {
+      "name": "/dec2/dec2.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/dec2/dec2.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ],
+   "tryFuse": {
+    "inputs": [
+     "/dec2/dec2.1/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "outputs": [
+     "/dec2/dec2.3/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "arguments": [
+     "/dec2/dec2.1/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "returnValues": [
+     "/dec2/dec2.3/Relu_output_0_QuantizeLinear_Output"
+    ],
+    "body": [
+     "/dec2/dec2.3/Relu_output_0_QuantizeLinear_Output",
+     "/dec2/dec2.3/Relu_output_0",
+     "/dec2/dec2.2/Conv_output_0",
+     "dec2.2.bias_DequantizeLinear_Output",
+     "dec2.2.weight_DequantizeLinear_Output",
+     "/dec2/dec2.1/Relu_output_0_DequantizeLinear_Output"
+    ]
+   },
+   "onnxOutputAnchorPoints": [
+    {
+     "name": "/dec2/dec2.3/Relu_output_0_DequantizeLinear_Output_vaip_63",
+     "opType": "transpose",
+     "next": {
+      "name": "/dec2/dec2.3/Relu_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/dec2/dec2.3/Relu_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "status": "OK",
+   "subgrpahName": "subgraph_dec1.bias_DequantizeLinear_Output_vaip_87",
+   "xirSubgraphInputs": [
+    {
+     "name": "/up_2/Resize_output_0_DequantizeLinear_Output_vaip_64"
+    }
+   ],
+   "xirSubgraphOutputs": [
+    {
+     "name": "output_fix"
+    }
+   ],
+   "xirInputAnchorPoints": [
+    {
+     "name": "/up_2/Resize_output_0_DequantizeLinear_Output_vaip_64",
+     "opType": "transpose",
+     "next": {
+      "name": "/up_2/Resize_output_0_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "/up_2/Resize_output_0_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "pass": "fuse_transpose",
+     "attribute": {
+      "transposeAttr": {
+       "order": [
+        "0",
+        "2",
+        "3",
+        "1"
+       ]
+      }
+     }
+    }
+   ],
+   "xirOutputAnchorPoints": [
+    {
+     "name": "output_fix",
+     "opType": "identity",
+     "next": {
+      "name": "output_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "output_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ],
+   "tryFuse": {
+    "inputs": [
+     "/up_2/Resize_output_0_QuantizeLinear_Output"
+    ],
+    "outputs": [
+     "output_QuantizeLinear_Output"
+    ],
+    "arguments": [
+     "/up_2/Resize_output_0_QuantizeLinear_Output"
+    ],
+    "returnValues": [
+     "output_QuantizeLinear_Output"
+    ],
+    "body": [
+     "output_QuantizeLinear_Output",
+     "output_QuantizeLinear_Input",
+     "dec1.bias_DequantizeLinear_Output",
+     "dec1.weight_DequantizeLinear_Output",
+     "/up_2/Resize_output_0_DequantizeLinear_Output"
+    ]
+   },
+   "onnxOutputAnchorPoints": [
+    {
+     "name": "output_fix",
+     "opType": "identity",
+     "next": {
+      "name": "output_QuantizeLinear_Output",
+      "opType": "identity",
+      "originNode": "output_QuantizeLinear_Output",
+      "pass": "fuse_DPU",
+      "attribute": {}
+     },
+     "attribute": {}
+    }
+   ]
+  }
+ ]
+}
